@@ -20,19 +20,47 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaceHandler databaceHandler = new DatabaceHandler(this);
 
-        databaceHandler.addCar(new Car("Toyota", "30 000 $"));
-        databaceHandler.addCar(new Car("Opel", "20 000 $"));
-        databaceHandler.addCar(new Car("Kia", "25 000 $"));
-        databaceHandler.addCar(new Car("Deawoo", "5 000 $"));
+        Log.d("CarsCount", String.valueOf(databaceHandler.getCarsCount()));
+
+        /* Создаем базу данных, выводим в Лог */
+
+//        databaceHandler.addCar(new Car("Toyota", "30 000 $"));
+//        databaceHandler.addCar(new Car("Opel", "20 000 $"));
+//        databaceHandler.addCar(new Car("Kia", "25 000 $"));
+//        databaceHandler.addCar(new Car("Daewoo", "5 000 $"));
 
         List<Car> catList = databaceHandler.getAllCars();
 
+//        for (Car car : catList) {
+//
+//            Log.d("Car Info", "ID " + car.getId() + ", name " + car.getName() + ", price " + car.getPrice());
+//        }
+
+
+        /* Обнавляем базу данных, выводим в Лог  */
+
+//        Car car = databaceHandler.getCar(1);
+//
+////        Log.d("Car Info", "ID " + car.getId() + ", name " + car.getName() + ", price " + car.getPrice());
+//
+//        car.setName("Tesla");
+//        car.setPrice("50 000 $");
+//
+//        databaceHandler.updateCar(car);
+//
+//        Log.d("Car Info", "ID " + car.getId() + ", name " + car.getName() + ", price " + car.getPrice());
+//
+
+
+        /* Удаляем елемент из базы данных, выводим в Лог */
+
+//        Car deleteCar = databaceHandler.getCar(1);  //
+//
+//        databaceHandler.deleteCar(deleteCar);
+
         for (Car car : catList) {
 
-            Log.d("Car Info ", "ID " + car.getId() + ", name " + car.getName() + ", price " + car.getPrice());
-
+            Log.d("Car Info", "ID " + car.getId() + ", name " + car.getName() + ", price " + car.getPrice());
         }
-
-
     }
 }

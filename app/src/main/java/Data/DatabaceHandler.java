@@ -49,7 +49,7 @@ public class DatabaceHandler extends SQLiteOpenHelper {
      */
 
 
-    // Создаем метод "добавить автомобиль"
+    // Создаем метод "добавить автомобиль" *Create
 
     public void addCar(Car car) {
         SQLiteDatabase db = this.getWritableDatabase();     // getWritableDatabase - записать
@@ -63,7 +63,7 @@ public class DatabaceHandler extends SQLiteOpenHelper {
         db.close(); // Закрываем соединение с базой данных
     }
 
-    /* Создаем метод для извлечения записей с базы данных */
+    /* Создаем метод для извлечения записей с базы данных * Read */
 
     public Car getCar(int id) {
         SQLiteDatabase db = this.getReadableDatabase(); //getReadableDatabase - чтение
@@ -115,4 +115,49 @@ public class DatabaceHandler extends SQLiteOpenHelper {
         }
         return carsList;
     }
+
+
+    // Обновление записи в базе данных * Update
+
+    public int updateCar(Car car) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Util.KEY_NAME, car.getName());
+        contentValues.put(Util.KEY_PRICE, car.getPrice());
+
+
+        /*
+            Вызываем метод Update для созданой таблицы (указываем имя таблицы, только что созданное contentValues,
+            указываем ID записи куда будем помещать эту информацию, передаем данный ID который мы извлечом из обьекта
+            car который передается в качестве параметра в метод updateCar (для этого помещаем ID в новый стринговый массив).
+         */
+
+
+        return db.update(Util.TABLE_NAME, contentValues, Util.KEY_ID + "=?",
+                new String[] {String.valueOf(car.getId())});
+    }
+
+
+    // Имлементируем метод удаления данных из базы данных * Delete
+
+    public void deleteCar (Car car) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        db.delete(Util.TABLE_NAME, Util.KEY_ID + "=?",
+                new String[] {String.valueOf(car.getId())});
+
+        db.close();
+    }
+
+    // Имплементируем метод для получения количества всех записей в таблице
+
+    public int getCarsCount () {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String countQuery = "SELECT * FROM " + Util.TABLE_NAME;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        return cursor.getCount();
+    }
+
 }
